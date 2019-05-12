@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+		<title>Material Design Style and Visual Editor for WordPress Contact Form 7 - Form7.pro</title>
+		<style>
+			html, body {
+				min-width: 320px;
+				font-size: 16px;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+
+				-webkit-text-size-adjust: 100%;
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+			}
+
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
+
+			body {
+				color: #333;
+				background-color: #fff;
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+			}
+
+			.container,
+			.Nav,
+			.Footer {
+				max-width: 1430px;
+				margin: 0 auto;
+				padding: 0 20px;
+			}
+			.MD-BlockContainer.svelte-1gzsmuu{min-height:100vh;min-height:calc(100vh - var(--header-height));display:flex}.MD-Block.svelte-1gzsmuu{margin-top:30px;width:50%}.MD-Block-Img.svelte-1gzsmuu{width:100%;max-width:300px}
+.Body_fullHeight.svelte-qzyzc2{display:flex;flex-direction:column;min-height:100vh}.Body_fullHeight.svelte-qzyzc2>footer{margin-top:auto}
+#header-solid-scroll-catcher.svelte-b95a97{position:absolute;top:0;height:45vh;visibility:hidden}#header-solid-scroll-observer.svelte-b95a97{position:absolute;bottom:0}:root{--header-height:80px}.StickyHeader.svelte-b95a97{min-height:var(--header-height);position:fixed;z-index:700;width:100%;padding-top:10px;padding-bottom:10px;background-color:transparent
+	}.StickyHeader-Solid.svelte-b95a97{box-shadow:0 2px 10px 0 rgba(0,0,0,.07);background-color:#FFF;position:absolute;z-index:-1;top:0;left:0;right:0;bottom:0;pointer-events:none}
+.Nav.svelte-v9iito{display:flex;align-items:center}.Nav-Item.svelte-v9iito{flex:1}.Nav-Item_center.svelte-v9iito{display:flex;justify-content:center;align-items:center}.Nav-Item_center.svelte-v9iito a.svelte-v9iito{color:#000;text-decoration:none;font-size:16px;font-weight:500;padding:4px 8px;margin:4px 8px;text-transform:uppercase;letter-spacing:.03em;background-color:rgba(255, 255, 255, .4);transition:color 150ms, background-color 150ms, opacity 150ms;transition-timing-function:cubic-bezier(0.4, 0.0, 0.2, 1)}.Nav-Item_center.svelte-v9iito{pointer-events:none}.Nav-Item_center.svelte-v9iito>.svelte-v9iito{pointer-events:auto}.Nav-Item_center.svelte-v9iito:hover>.svelte-v9iito,.Nav-Item_center.svelte-v9iito:focus-within>.svelte-v9iito{opacity:.6;transition:opacity .5s}.Nav-Item_center.svelte-v9iito:hover>:hover,.Nav-Item_center.svelte-v9iito:focus-within>:focus{opacity:1;background-color:rgba(255, 255, 255, .9)}
+.F7-Logo.svelte-zd0hng{color:#000;max-width:180px;height:56px;margin-top:2px;display:inline-block;transition:color 100ms}.F7-Logo-Content.svelte-zd0hng{display:inline-flex}.F7-Logo.F7-Logo_white{color:#FFF}a.F7-Logo.svelte-zd0hng{text-decoration:none}
+.HeroSection.svelte-m41ja2{position:relative;min-height:100vh;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}.HeroSection_withBg{color:#FFF}.HeroSection-Picture.svelte-m41ja2{position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;display:flex;overflow:hidden}.HeroSection-Picture.svelte-m41ja2 img.svelte-m41ja2{flex:0 0 auto;width:auto;height:100%;margin-left:50%;transform:translateX(-50%)}@supports (object-fit: cover){.HeroSection-Picture.svelte-m41ja2 img.svelte-m41ja2{margin-left:0;transform:none;height:auto;object-fit:cover;object-position:center}}.HeroDisplay.svelte-m41ja2{font-size:240px;font-weight:500}@media(max-width: 1200px){.HeroDisplay.svelte-m41ja2{font-size:calc(15px + 20vw)}}
+footer.svelte-17dwo4x{background-color:#455a64;padding:4px}.footer-border.svelte-17dwo4x{background-color:#37474f;border-radius:16px}.Footer.svelte-17dwo4x{color:#ddd;padding:10px;display:flex;align-items:center}.Footer-Item.svelte-17dwo4x{flex:1}@media screen and (max-width: 600px){.Footer-Item_right.svelte-17dwo4x{flex:none}}.Follow.svelte-17dwo4x{display:flex;align-items:center;color:#fff}.FollowTitle.svelte-17dwo4x{font-size:15px;margin:0;margin-right:.75em;font-weight:400}.FollowList.svelte-17dwo4x{list-style:none;padding:0;margin:0}.FollowList-Item.svelte-17dwo4x{width:30px;height:30px}.Follow-Twitter.svelte-17dwo4x img.svelte-17dwo4x{width:100%;height:100%}.Copyright.svelte-17dwo4x{text-align:center;font-weight:300;font-size:14px}@media screen and (max-width: 600px){.Copyright.svelte-17dwo4x{text-align:right}}
+		</style>
+
+		<script>
+			window.customScripts = {};
+			window.customScriptsRun = {};
+			window.customState = {
+				state: {},
+				_callbacks: [],
+				set: function(name, value) {
+					var self = this;
+					self.state[name] = value;
+					this._callbacks.forEach(function(callbackArr) {
+						if (! callbackArr[1] || callbackArr[1] === name) {
+							callbackArr[0](value, name, self.state);
+						}
+					});
+				},
+				subscribe: function(callback, name) {
+					this._callbacks.push([callback, name]);
+					if (this.state[name] !== undefined) {
+						callback(this.state[name], name, this.state);
+					}
+				}
+			};
+		</script>
+	</head>
+	<body class="svelte-qzyzc2">
+		
+		<div id="header-solid-scroll-catcher" class="svelte-b95a97">
+		<div id="header-solid-scroll-observer" class="svelte-b95a97"></div>
+	</div>
+
+	<header class="StickyHeader svelte-b95a97">
+		
+			<nav class="Nav svelte-v9iito">
+		<div class="Nav-Item Nav-Item_left svelte-v9iito">
+			<a href="/" class="F7-Logo svelte-zd0hng" aria-label="Home">
+		<div class="F7-Logo-Content svelte-zd0hng">
+			<iframe title="Logo" width="180" height="54" frameborder="0" src="./img/Form7pro.svg" loading="lazy" onload="this.parentNode.replaceChild(this.contentDocument.childNodes[0], this); customState.set('logo-loaded', true)"></iframe>
+		</div>
+	</a>
+		</div>
+
+		<div class="Nav-Item Nav-Item_center svelte-v9iito">
+			<a href="#" class="svelte-v9iito">Tour</a>
+			<a href="#" class="svelte-v9iito">Pricing</a>
+			<a href="#" class="svelte-v9iito">Support</a>
+		</div>
+
+		<div class="Nav-Item Nav-Item_right svelte-v9iito">
+		</div>
+	</nav>
+		
+		<div class="StickyHeader-Solid svelte-b95a97"></div>
+	</header>
+
+		<main>
+			<div class="HeroSection svelte-m41ja2">
+		<h2 class="HeroDisplay svelte-m41ja2">Build it.</h2>
+		<picture class="HeroSection-Picture svelte-m41ja2">
+			<source type="image/webp" srcset="./img/main-bg/main-bg_800w.webp 800w, ./img/main-bg/main-bg_1600w.webp 1600w, ./img/main-bg/main-bg_1920w.webp 1920w, ./img/main-bg/main-bg_3200w.webp 3200w">
+			<source type="image/jpeg" srcset="./img/main-bg/main-bg_800w.jpg 800w, ./img/main-bg/main-bg_1600w.jpg 1600w, ./img/main-bg/main-bg_1920w.jpg 1920w, ./img/main-bg/main-bg_3200w.jpg 3200w">
+			<img src="./img/main-bg/main-bg_1600w.jpg" loading="lazy" alt="Build it." onload="customState.set('hero-bg-loaded', true);" class="svelte-m41ja2">
+		</picture>
+	</div>
+
+			<div class="container">
+				<div class="MD-BlockContainer svelte-1gzsmuu">
+					<div class="MD-Block MD-Block-Left svelte-1gzsmuu">
+						<p style="font-size: 22px">Material Design Style and Visual Editor</p>
+					</div>
+					<div class="MD-Block MD-Block-Right svelte-1gzsmuu">
+						<img class="MD-Block-Img svelte-1gzsmuu" src="./img/colors.jpg" loading="lazy" alt="Colors">
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer class="svelte-17dwo4x">
+		<div class="footer-border svelte-17dwo4x">
+			<div class="Footer svelte-17dwo4x">
+				<div class="Follow Footer-Item Footer-Item_left svelte-17dwo4x">
+					<h5 class="FollowTitle svelte-17dwo4x">Follow us</h5>
+					<ul class="FollowList svelte-17dwo4x">
+						<li class="FollowList-Item svelte-17dwo4x"><a class="Follow-Twitter svelte-17dwo4x" href="https://twitter.com/form7pro" target="_blank" rel="noopener noreferrer"><img src="./img/Twitter_Logo_White.svg" loading="lazy" alt="Twitter" class="svelte-17dwo4x"></a></li>
+					</ul>
+				</div>
+				<div class="Copyright Footer-Item Footer-Item_center svelte-17dwo4x">© 2019 Form7.pro</div>
+				<div class="Footer-Item Footer-Item_right svelte-17dwo4x"></div>
+			</div>
+		</div>
+	</footer>
+
+		<script nomodule>
+			window.customSupportsModule = false;
+		</script>
+
+		<script>
+			(function(){
+				var supports = {};
+
+				supports.transparentHeader = window.customSupportsModule !== false
+					&& 'IntersectionObserver' in window
+					&& 'animate' in document.querySelector('.StickyHeader');
+
+				if (supports.transparentHeader) {
+					window.customScriptsRun.headerScrollListener = true;
+				}
+
+				function handleHeroBgLoad(loaded) {
+					if (supports.transparentHeader && loaded) {
+						document.querySelector('.StickyHeader .F7-Logo').classList.add('F7-Logo_white');
+					}
+					if (loaded) {
+						document.querySelector('.HeroSection').classList.add('HeroSection_withBg');
+					}
+				}
+				window.customState.subscribe(handleHeroBgLoad, 'hero-bg-loaded');
+
+			})();
+		</script>
+
+		<script type="module" async>
+			import { animate } from './js/asyncBundle.js'
+
+			export
+			function headerScrollListener() {
+				const $observer = document.querySelector('#header-solid-scroll-observer')
+				const $catchers = [ document.querySelector('#header-solid-scroll-catcher') ]
+
+				const $header = document.querySelector('.StickyHeader')
+
+				const rootConfig = {
+					root: null,
+					rootMargin: "-0% 0px -80%"
+				}
+
+				const animationConfigs = [
+					{
+						$el: $header.querySelector('.StickyHeader-Solid'),
+						keyframes: [
+							{ opacity: '0' },
+							{ opacity: '1' }
+						],
+						options: {
+							easing: 'cubic-bezier(0.4, 0.0, 0.2, 1)'
+						}
+					},
+					{
+						$el: $header.querySelector('.F7-Logo-Content'),
+						keyframes: [
+							{ color: 'currentColor' },
+							{ color: '#000' }
+						],
+						options: {
+							easing: 'cubic-bezier(0.4, 0.0, 0.2, 1)'
+						}
+					},
+				]
+
+				animate($observer, rootConfig, animationConfigs, $catchers)
+			}
+
+			if (window.customScriptsRun.headerScrollListener) {
+				(async () => await headerScrollListener())()
+			}
+		</script>
+	
+	</body>
+	</html>
