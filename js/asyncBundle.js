@@ -4,11 +4,21 @@ function animate($observer, rootConfig, animationConfigs, $catchers) {
 
 	const animations = []
 
-	animationConfigs.forEach(config => {
-		const animation = config.$el.animate(config.keyframes, { ...{ fill: 'forwards' }, ...config.options, duration })
+	const initAnimation = ($el, config) => {
+		const animation = $el.animate(config.keyframes, { ...{ fill: 'forwards' }, ...config.options, duration })
 		animation.pause()
 		animations.push(animation)
-	})
+	}
+
+	for (const config of animationConfigs) {
+		if (config.$el instanceof NodeList) {
+			for (const $el of config.$el) {
+				initAnimation($el, config)
+			}
+		} else {
+			initAnimation(config.$el, config)
+		}
+	}
 
 	let lastKnownScrollPosition = 0
 	let ticking = false
