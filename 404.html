@@ -50,20 +50,41 @@ footer.svelte-17dwo4x{background-color:#455a64;padding:4px}.footer-border.svelte
 			window.customScriptsRun = {};
 			window.customState = {
 				state: {},
-				_callbacks: [],
+				_callbacks: {},
+				_callbacksOnce: {},
 				set: function(name, value) {
 					var self = this;
 					self.state[name] = value;
-					this._callbacks.forEach(function(callbackArr) {
-						if (! callbackArr[1] || callbackArr[1] === name) {
-							callbackArr[0](value, name, self.state);
-						}
-					});
+					if (this._callbacks[name]) {
+						this._callbacks[name].forEach(function(callback) {
+							callback(value, name, self.state);
+						});
+					}
+					if (this._callbacksOnce[name]) {
+						this._callbacksOnce[name].forEach(function(callback) {
+							callback(value, name, self.state);
+						});
+
+						delete this._callbacksOnce[name];
+					}
 				},
-				subscribe: function(callback, name) {
-					this._callbacks.push([callback, name]);
+				subscribe: function(name, callback) {
+					if (! this._callbacks[name]) {
+						this._callbacks[name] = [];
+					}
+					this._callbacks[name].push(callback);
 					if (this.state[name] !== undefined) {
 						callback(this.state[name], name, this.state);
+					}
+				},
+				subscribeOnce: function(name, callback) {
+					if (this.state[name] !== undefined) {
+						callback(this.state[name], name, this.state);
+					} else {
+						if (! this._callbacksOnce[name]) {
+							this._callbacksOnce[name] = [];
+						}
+						this._callbacksOnce[name].push(callback);
 					}
 				}
 			};
