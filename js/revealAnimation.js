@@ -122,6 +122,7 @@ export default
 		if (! content.loaded) {
 			const startTs = (new Date()).getTime()
 			await waitImageReady($container, content, onSlideMount)
+			content.loaded = true
 			const endTs = (new Date()).getTime()
 
 			const toSleep = endTs - startTs + content.pause
