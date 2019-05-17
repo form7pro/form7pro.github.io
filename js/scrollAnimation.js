@@ -1,33 +1,47 @@
 
 const duration = 1000
 
-const createObserver = ($observer, rootConfig, scrollAnimationObserver) => {
+const createObserver = ($observer, rootConfig, scrollAnimationObserver, fallback) => {
 
-	const intersectionObserver = new IntersectionObserver(entries => {
-		const observer = entries.find(entry => entry.target === $observer)
+	let intersectionObserver
 
-		if (observer) {
-			if (observer.isIntersecting) {
-				scrollAnimationObserver.start(observer)
+	if (scrollAnimationObserver) {
+		intersectionObserver = new IntersectionObserver(entries => {
+			const observer = entries.find(entry => entry.target === $observer)
+
+			if (observer) {
+				if (observer.isIntersecting) {
+					scrollAnimationObserver.start(observer, $observer)
+				} else {
+					scrollAnimationObserver.stop(observer, $observer)
+				}
 			} else {
-				scrollAnimationObserver.stop(observer)
+				scrollAnimationObserver.stop(entries[0], $observer)
 			}
-		} else {
-			scrollAnimationObserver.stop(observer)
-		}
 
-	}, rootConfig)
+		}, rootConfig)
+	} else if (fallback) {
+		intersectionObserver = new IntersectionObserver(entries => {
+			if (window.pageYOffset >= $observer.offsetTop) {
+				fallback.$el.classList.remove(fallback.classBackward)
+				fallback.$el.classList.add(fallback.classForward)
+			} else {
+				fallback.$el.classList.remove(fallback.classForward)
+				fallback.$el.classList.add(fallback.classBackward)
+			}
+		}, fallback.rootConfig || rootConfig)
+	}
 
 	return intersectionObserver
 }
 
-const toPositionsBoundaries = entry => {
+const toPositionsBoundaries = (entry, $observer) => {
 	const elPosition = {}
 	const scrollPositionBoundaries = {}
 
 	elPosition.boundingClientRect = entry.boundingClientRect
 	elPosition.rootBounds = entry.rootBounds
-	elPosition.offsetTop = entry.target.offsetTop
+	elPosition.offsetTop = $observer.offsetTop
 
 	scrollPositionBoundaries.min = elPosition.offsetTop - elPosition.rootBounds.height - elPosition.rootBounds.top
 	scrollPositionBoundaries.max = elPosition.offsetTop + elPosition.boundingClientRect.height - elPosition.rootBounds.top
@@ -72,7 +86,7 @@ class ScrollAnimationObserver {
 		this._onScroll = this._getOnScroll()
 	}
 
-	start(intersection) {
+	start(intersection, $observer) {
 		if (this._started) {
 			return
 		}
@@ -82,18 +96,18 @@ class ScrollAnimationObserver {
 			this.initAnimations()
 		}
 
-		this._scrollPositionBoundaries = toPositionsBoundaries(intersection)
+		this._scrollPositionBoundaries = toPositionsBoundaries(intersection, $observer)
 
 		this._handleScroll(window.pageYOffset)
 
 		window.addEventListener('scroll', this._onScroll, { passive: true })
 	}
 
-	stop(intersection) {
+	stop(intersection, $observer) {
 		if (! this._started) {
 
 			if (! this._scrollPositionBoundaries) {
-				this._scrollPositionBoundaries = toPositionsBoundaries(intersection)
+				this._scrollPositionBoundaries = toPositionsBoundaries(intersection, $observer)
 			}
 
 			this._handleScroll(window.pageYOffset)
@@ -139,14 +153,22 @@ class ScrollAnimationObserver {
 }
 
 export default
-function animate($observer, rootConfig, animationConfigs, $catchers = undefined) {
+function animate($observer, rootConfig, animationConfigs, fallback = undefined, $catchers = undefined) {
 	if (! ('IntersectionObserver' in window)) {
 		return
 	}
 
-	const scrollAnimationObserver = new ScrollAnimationObserver(animationConfigs)
+	if (! ('animate' in Element.prototype) && ! fallback) {
+		return
+	}
 
-	const intersectionObserver = createObserver($observer, rootConfig, scrollAnimationObserver)
+	let scrollAnimationObserver
+
+	if ('animate' in Element.prototype) {
+		scrollAnimationObserver = new ScrollAnimationObserver(animationConfigs)
+	}
+
+	const intersectionObserver = createObserver($observer, rootConfig, scrollAnimationObserver, fallback)
 
 	intersectionObserver.observe($observer)
 
