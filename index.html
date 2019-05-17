@@ -279,7 +279,7 @@ footer.svelte-17dwo4x{background-color:#455a64;padding:4px}.footer-border.svelte
 		</script>
 
 		<script type="module" async>
-			import { animate } from './js/asyncBundle.js'
+			import animate from './js/scrollAnimation.js'
 
 			export
 			function headerScrollListener() {
@@ -330,12 +330,12 @@ footer.svelte-17dwo4x{background-color:#455a64;padding:4px}.footer-border.svelte
 			}
 
 			if (window.customScriptsRun.headerScrollListener) {
-				(async () => await headerScrollListener())()
+				headerScrollListener()
 			}
 		</script>
 
 		<script type="module" async>
-			import { animate } from './js/asyncBundle.js'
+			import animate from './js/scrollAnimation.js'
 
 			export
 			function titleScrollListener() {
@@ -370,7 +370,7 @@ footer.svelte-17dwo4x{background-color:#455a64;padding:4px}.footer-border.svelte
 				animate($observer, rootConfig, animationConfigs)
 			}
 
-			(async () => await titleScrollListener())()
+			titleScrollListener()
 		</script>
 	
 	</body>
