@@ -57,7 +57,7 @@ const initAnimations = (animationConfigs) => {
 		if (! ('animate' in $el)) {
 			return
 		}
-		const animation = $el.animate(config.keyframes, { ...{ fill: 'both' }, ...config.options, duration })
+		const animation = $el.animate(config.keyframes, Object.assign({}, { fill: 'both' }, config.options, { duration } ))
 		animation.pause()
 		animations.push(animation)
 	}
