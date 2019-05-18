@@ -62,9 +62,13 @@ const initAnimations = (animationConfigs) => {
 		animations.push(animation)
 	}
 
-	for (const config of animationConfigs) {
+	for (let i = 0; i < animationConfigs.length; i++) {
+		const config = animationConfigs[ i ]
+
 		if (config.$el instanceof NodeList) {
-			for (const $el of config.$el) {
+			for (let j = 0; j < config.$el.length; j++) {
+				const $el = config.$el[ j ]
+
 				initAnimation($el, config)
 			}
 		} else {

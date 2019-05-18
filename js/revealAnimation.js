@@ -3,7 +3,9 @@ if (! Element.prototype.matches) {
 }
 
 const firstChildren = ($parent, selector) => {
-	for (const $child of $parent.children) {
+	for (let i = 0; i < $parent.children.length; i++) {
+		const $child = $parent.children[ i ]
+
 		if ($child.matches(selector)) {
 			return $child
 		}
@@ -80,7 +82,9 @@ const waitImageReady = ($container, content, onSlideMount) => new Promise(resolv
 		}
 	}
 
-	for (const $img of $imgs) {
+	for (let i = 0; i < $imgs.length; i++) {
+		const $img = $imgs[ i ]
+
 		if ($img.complete) {
 			markReady()
 		} else {
